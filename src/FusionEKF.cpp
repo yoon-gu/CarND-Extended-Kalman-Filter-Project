@@ -118,6 +118,9 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   float dt = (measurement_pack.timestamp_ - previous_timestamp_) / 1000000.0;
   previous_timestamp_ = measurement_pack.timestamp_;
 
+  ekf_.F_(0, 2) = dt;
+  ekf_.F_(1, 3) = dt;
+
   const double noise_ax = 9;
   const double noise_ay = 9;
 
